@@ -1,19 +1,31 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import getGlobalTimeline from './utils/api';
 import './App.css';
 
 function App() {
+  const [globalStats, setGlobalStats] = useState(null);
 
   useEffect(() => {
     getGlobalTimeline()
       .then(data => {
-        console.log(data.data[0]);
+        setGlobalStats(data.data[0]);
       })
 
-  });
-  return (
+  }, []);
+  return console.log(globalStats) || (
     <div className="App">
-      App
+      {!globalStats 
+        ? <p>Loading...</p> 
+        : 
+        (
+          <React.Fragment>
+            <p>{`Total Confirmed cases: ${globalStats.confirmed}`}</p>
+            <p>{`Total Confirmed deaths: ${globalStats.deaths}`}</p>
+            <p>{`Recovered: ${globalStats.recovered}`}</p>
+            <p>{`Updated at: ${new Date(globalStats.updated_at).toLocaleString()}`}</p>
+          </React.Fragment>
+        )
+      }
     </div>
   );
 }
