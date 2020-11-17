@@ -1,22 +1,9 @@
-import React, { useEffect, useState } from 'react';
-import getGlobalTimeline from './utils/api';
-import './App.css';
+import React from 'react';
 
-function App() {
-  const [globalStats, setGlobalStats] = useState(null);
+const Dashboard = ({ globalStats }) => {
 
-  useEffect(() => {
-    getGlobalTimeline()
-      .then(data => {
-        setGlobalStats(data.data[0]);
-      })
-      .catch(e => {
-        // TODOD - ADD PROPER ERROR HANDLING
-        alert('Unable to fetch global data!');
-      });
-  }, []);
-  return console.log(globalStats) || (
-    <div className="App">
+  return (
+    <React.Fragment>
       <h1>Global Totals</h1>
       <p>Refresh all</p>
       {!globalStats 
@@ -36,8 +23,8 @@ function App() {
           </React.Fragment>
         )
       }
-    </div>
+    </React.Fragment>
   );
-}
+};
 
-export default App;
+export default Dashboard;
