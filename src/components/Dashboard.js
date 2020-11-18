@@ -1,4 +1,5 @@
 import React from 'react';
+import LastDayStats from './LastDayStats';
 
 const Dashboard = ({ globalStats }) => {
 
@@ -41,9 +42,8 @@ const Dashboard = ({ globalStats }) => {
           )
         }
       </div>
-
       <hr></hr>
-     
+      <LastDayStats globalStats={globalStats} />
     </React.Fragment>
   );
 };
